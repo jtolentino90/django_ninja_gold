@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> Ninja Gold </title>
+	</head>
+
+	<body>
+		<h1> Welcome to Ninja Gold! </h1>
+		<p> Your Gold: {{ request.session.gold }} </p>
+
+		<h1> Farm </h1>
+		<p> (earns 10-20 gold) </p>
+		<form action='/process_gold' method='post'>
+			{% csrf_token %}
+			<input type='submit' name='building' value='farm'/>
+		</form>
+
+		<h1> Cave </h1>
+		<p> (earns 5-10 gold) </p>
+		<form action='/process_gold' method='post'>
+			{% csrf_token %}
+			<input type='submit' name='building' value='cave'/>
+		</form>
+
+		<h1> House </h1>
+		<p> (earns 2-5 gold) </p>
+		<form action='/process_gold' method='post'>
+			{% csrf_token %}
+			<input type='submit' name='building' value='house'/>
+		</form>
+
+		<h1> Casino </h1>
+		<p> (earn/lose 0-50 gold) </p>
+		<form action='/process_gold' method='post'>
+			{% csrf_token %}
+			<input type='submit' name='building' value='casino'/>
+		</form>
+
+
+		<a href='/reset'> Reset </a>
+		{% for element in request.session.comments %}
+			{% for comment, value in element.items %}
+				<p> {{value}} </p>
+			{% endfor %}
+		{% endfor %}
+	</body>
+
+</html>
